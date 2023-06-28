@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import Form from "@/components/Form";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 function page() {
   // const
+  const router = useRouter();
   const { data: session } = useSession();
   const [post, setPost] = useState({
     tag: "",
@@ -19,13 +21,25 @@ function page() {
     const body = JSON.stringify({ ...post, userId: session?.user.id });
     console.log(body);
     toast.promise(
-      fetch("api/prompt", {
-        method: "post",
-        body: body,
-      })
-        .then((res) => {})
-        .catch((err) => console.log(err.message))
-        .finally(() => setSubmitting(false)),
+      new Promise((reslove, reject) =>
+        fetch("api/prompt", {
+          method: "post",
+          body: body,
+        })
+          .then((res) => {
+            //    console.log();
+            if (res.status == 201) {
+              //     toast("The Prompt Add Successfuly");
+              reslove();
+              router.push("/");
+            }
+          })
+          .catch((err) => {
+            reject();
+            toast.error("Some Thing Went Worng");
+          })
+          .finally(() => setSubmitting(false))
+      ),
 
       {
         pending: "Insert Prompt To System",

@@ -23,3 +23,17 @@ export const POST = async (req) => {
     return new Response(error.message, { status: 500 });
   }
 };
+
+export const GET = async (req) => {
+  try {
+    const prompts = await Prompt.find().populate("userId");
+    const repsonse = {
+      status: true,
+      prompts,
+    };
+    return new Response(JSON.stringify(repsonse), { status: 200 });
+  } catch (error) {
+    console.log(error.message);
+    return new Response(error.message, { status: 500 });
+  }
+};
