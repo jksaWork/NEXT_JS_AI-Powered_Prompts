@@ -20,12 +20,12 @@ function Nav() {
   }, []);
   return (
     <div className="w-full flex-between mb-12">
-      <Link href="/" className="flex gap-2 p-5">
+      <Link href="/" className="flex gap-2 p-5 items-center">
         {" "}
         <Image
           src="/assets/images/logo.svg"
-          width="30"
-          height="30"
+          width="40"
+          height="40"
           alt="Promptopia"
         />
         <div className="logo_text">Promptopia</div>
@@ -42,13 +42,15 @@ function Nav() {
             <button type="button" onClick={signOut} className="outline_btn">
               Sign Out
             </button>
-            <Image
-              src={session?.user?.image}
-              width="30"
-              height="30"
-              alt="Promptopia"
-              className="rounded-full"
-            />
+            <div>
+              <Image
+                src={session?.user?.image}
+                width="30"
+                height="30"
+                alt="Promptopia"
+                className="rounded-full"
+              />
+            </div>
           </div>
         ) : (
           <>
@@ -73,9 +75,9 @@ function Nav() {
         {session?.user ? (
           <div className="relative">
             <Image
-              src="/assets/images/logo.svg"
-              width="30"
-              height="30"
+              src={session?.user?.image}
+              width="40"
+              height="40"
               alt="Promptopia"
               className="rounded-full"
               onClick={() => setOpenDropDown((prev) => !prev)}
