@@ -3,14 +3,15 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { signOut, getProviders } from "next-auth/react";
+import { signOut, getProviders, useSession, signIn } from "next-auth/react";
 
 // import
 
 function Nav() {
   const [providers, setProviders] = useState();
   const [openDropDown, setOpenDropDown] = useState();
-
+  const { data: session } = useSession();
+  //   console.log(session);
   useEffect(() => {
     (async () => {
       const res = await getProviders();
@@ -32,7 +33,7 @@ function Nav() {
 
       {/* Desktop Navigation */}
       <div className="max-sm:hidden">
-        {true ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Post
@@ -42,7 +43,7 @@ function Nav() {
               Sign Out
             </button>
             <Image
-              src="/assets/images/logo.svg"
+              src={session?.user?.image}
               width="30"
               height="30"
               alt="Promptopia"
@@ -69,7 +70,7 @@ function Nav() {
       </div>
       {/* Mobile Appplication */}
       <div className="sm:hidden">
-        {true ? (
+        {session?.user ? (
           <div className="relative">
             <Image
               src="/assets/images/logo.svg"
