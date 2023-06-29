@@ -43,13 +43,15 @@ function Nav() {
               Sign Out
             </button>
             <div>
-              <Image
-                src={session?.user?.image}
-                width="30"
-                height="30"
-                alt="Promptopia"
-                className="rounded-full"
-              />
+              <Link href="/profile">
+                <Image
+                  src={session?.user?.image}
+                  width="30"
+                  height="30"
+                  alt="Promptopia"
+                  className="rounded-full"
+                />
+              </Link>
             </div>
           </div>
         ) : (
