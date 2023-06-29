@@ -1,6 +1,7 @@
 import { connectToDB } from "@/utils/database.js";
 import Prompt from "@/models/Prompt.js";
 import { json } from "stream/consumers";
+import { getQSParamFromURl } from "@/utils/QS.js";
 export const POST = async (req) => {
   const { userId, prompt, tag } = await req.json();
   try {
@@ -27,7 +28,17 @@ export const POST = async (req) => {
 export const GET = async (req) => {
   try {
     await connectToDB();
-    const prompts = await Prompt.find().populate("userId");
+    const search = getQSParamFromURl("search", req.url);
+    // const {
+    //   query: { search },
+    // } = req;
+    console.log(search);
+
+    const prompts = search
+      ? await Prompt.find({
+          $or: [{ tag: search }, { "userId.username": search }],
+        }).populate("userId")
+      : await Prompt.find().populate("userId");
     const repsonse = {
       status: true,
       prompts,

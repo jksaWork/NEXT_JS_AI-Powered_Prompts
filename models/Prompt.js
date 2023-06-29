@@ -13,6 +13,7 @@ const PromptSchema = new Schema({
   tag: String,
 });
 
+PromptSchema.index({ name: "text" });
 const Prompt = models.Prompt || model("Prompt", PromptSchema);
 
 export default Prompt;

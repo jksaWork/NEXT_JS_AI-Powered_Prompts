@@ -45,7 +45,6 @@ function page() {
         );
 
         const filteredPosts = posts.filter((item) => item._id !== post._id);
-
         setPosts(filteredPosts);
       } catch (error) {
         console.log(error);
