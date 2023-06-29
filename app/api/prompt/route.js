@@ -26,6 +26,7 @@ export const POST = async (req) => {
 
 export const GET = async (req) => {
   try {
+    await connectToDB();
     const prompts = await Prompt.find().populate("userId");
     const repsonse = {
       status: true,
