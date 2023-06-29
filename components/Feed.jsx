@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import PromptCard from "@/components/PromptCard";
 import { useRouter, useSearchParams } from "next/navigation";
 function Feed() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [posts, setPosts] = useState("");
   const searchParams = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState(searchParams.get("search"));
+  const [posts, setPosts] = useState("");
   const HandelSerachTerm = (e) => setSearchTerm(e.target.value);
   useEffect(() => {
     console.log(searchParams.has("search"), searchParams.get("search"));
