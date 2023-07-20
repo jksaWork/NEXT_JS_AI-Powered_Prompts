@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import Form from "@/components/Form";
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-function page() {
+function Page() {
   // const
   const router = useRouter();
   const { data: session } = useSession();
@@ -78,4 +78,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
