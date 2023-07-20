@@ -4,7 +4,7 @@ import Profile from "@/components/Profile";
 import { useSession } from "next-auth/react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
-function page() {
+function Page() {
   const [posts, setPosts] = useState([]);
   const { data: session } = useSession();
   const router = useRouter();
@@ -68,4 +68,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
