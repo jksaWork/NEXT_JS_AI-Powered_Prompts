@@ -11,7 +11,7 @@ export const metadata = {
   description: "Discover & Share AI Prompts",
 };
 
-const RootLayout = ({ children }) => (
+const RootLayout = ({ children }: { children: any }) => (
   <html lang="en">
     <body>
       <ToastContainer
@@ -26,7 +26,7 @@ const RootLayout = ({ children }) => (
         pauseOnHover
         theme="light"
       />
-      <Provider>
+      <Provider session={null}>
         <div className="main">
           <div className="gradient" />
         </div>
